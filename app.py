@@ -23,18 +23,17 @@ class Country(Document):
 
 @app.route('/country')
 def country():
-    countries = [{"name" : "New Zealand", "population" : 450000}]
-    # client = MongoClient()
-    # db = client.test
+   countries = [{"name" : "New Zealand", "population" : 450000}]
+
     # country = db.country
-    df = pd.read_csv(os.path.join(os.path.dirname(__file__), "data/country.csv")) #csv file which you want to import
-    records = df.to_dict(orient = 'records').save()
-    # result = db.country.insert_many(records_ )
+   df = pd.read_csv(os.path.join(os.path.dirname(__file__), "data/country.csv")) #csv file which you want to import
+   records = df.to_dict(orient = 'records')
+   result = db.country.insert_many(records)
 
     # for country in countries:
     #     Country(**country).save()
     
-    return Country.objects.to_json()
+   return Country.objects.to_json()
 
 @app.route('/')
 def index():
@@ -63,4 +62,4 @@ def listUsersTest():
     return User.objects.to_json()
 
 if __name__ =="__main__":
-    app.run(debug=True,port=8080)
+    app.run(debug=True, host='0.0.0.0', port=80)
