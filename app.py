@@ -11,9 +11,9 @@ from flask import jsonify
 app = Flask(__name__)
 app.config.from_object('config')
 
-connect('test')
+connect('country')
 client = MongoClient()
-db = client.test
+db = client.country
 
 class Country(Document):
     name = StringField()
